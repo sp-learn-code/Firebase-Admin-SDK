@@ -2,15 +2,18 @@
 
 const express = require('express')
 const morgan = require('morgan')
-const {db} = require('./firebase')
+const path = require('path')
+
 
 const app = express()
 app.use(morgan('dev'))
 
-app.get('/', async (req,res)=>{
-    const querySnapshot = await db.collection('contacts').get()
-    console.log(querySnapshot.docs[0].data())
-    res.send('Hello')
-})
+//Estas dos lineas hace que cuando yo envie un dato a traves de post (request body) el lo entendera
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
+app.use(require('./routes/index'))
+
+app.use(express.static(path.join(__dirname,'public')))
 
 module.exports = app
