@@ -29,6 +29,6 @@ app.use(express.urlencoded({extended:false}))
 app.use(require('./routes/index'))
 
 //Hace publica la carpeta en el navegador (aplicacion cliente), es decir, puede acceder a sus archivos
-app.use(express.static(path.join(__dirname,'public')))
+app.use('/public',express.static(path.join(__dirname,'public')))
 
 module.exports = app

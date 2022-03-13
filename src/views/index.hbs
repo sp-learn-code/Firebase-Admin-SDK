@@ -1,63 +1,64 @@
-<h1>Contacs</h1>
+<div class="col-md-6 offset-md-3">
+    <div class="card bg-dark text-light">
+        <div class="card-header">Contacts List</div>
+        <div class="card-body">
+            {{#if contacts}}
+            <ul class="list-group">
+                {{#each contacts}}
+                <li class="list-group-item flex justify-content-between align-items-center">
+                    <h3>{{firstname}} {{lastname}}</h3>
+                    <p>{{email}}</p>
+                    <p>{{phone}}</p>
 
-<ul>
-  {{#each contacts}}
-    <li>
-      <h3>{{firstname}} {{lastname}}</h3>
-      <p>{{email}}</p>
-      <p>{{phone}}</p>
+                    <a href="/delete-contact/{{id}}" class="btn btn-danger">Delete</a>
+                    <a href="/edit-contact/{{id}}" class="btn">Edit</a>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>Not contacts yet.</p>
+            {{/if}}
+        </div>
 
-      <a href="/delete-contact/{{id}}">Delete</a>
-      <a href="/edit-contact/{{id}}">Edit</a>
-    </li>
-  {{/each}}
-</ul>
+        <div class="card-footer">
+            <form action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}}{{/unless}}"
+                method="post">
+                <!-- El name es importante, ya que este nos indicara la clave del Json enviado, mientras que el dato ingresado sera el valor -->
+                <div class="row">
+                    <div class="col">
+                        <label for="firstname">First name: </label>
+                        <input type="text" name="firstname" placeholder="firstname" id="firstname"
+                            value="{{contact.firstname}}" class="form-control mb-2"/>
+                    </div>
+                    <div class="col">
+                        <label for="lastname">Last name: </label>
+                        <input type="text" name="lastname" placeholder="lastname" id="lastname"
+                            value="{{contact.lastname}}" class="form-control mb-2"/>
+                    </div>
+                </div>
 
-<form action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}}{{/unless}}" method="post">
-  <!-- El name es importante, ya que este nos indicara la clave del Json enviado, mientras que el dato ingresado sera el valor -->
-  <div>
-    <label for="firstname">First name: </label>
-    <input
-      type="text"
-      name="firstname"
-      placeholder="firstname"
-      id="firstname"
-      value="{{contact.firstname}}"
-    />
-  </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" placeholder="email" id="email" value="{{contact.email}}" class="form-control mb-2"/>
+                    </div>
 
-  <div>
-    <label for="lastname">Last name: </label>
-    <input
-      type="text"
-      name="lastname"
-      placeholder="lastname"
-      id="lastname"
-      value="{{contact.lastname}}"
-    />
-  </div>
+                    <div class="col">
+                        <label for="phone">Phone: </label>
+                        <input type="text" name="phone" placeholder="phone" id="phone" value="{{contact.phone}}" class="form-control mb-2"/>
+                    </div>
+                </div>
 
-  <div>
-    <label for="email">Email: </label>
-    <input
-      type="text"
-      name="email"
-      placeholder="email"
-      id="email"
-      value="{{contact.email}}"
-    />
-  </div>
+                {{#if contact.id}}
+                    <button class="btn btn-primary btn-block">Update</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                {{else}}
+                    <button class="btn btn-primary btn-block">Add</button>
+                {{/if}}
 
-  <div>
-    <label for="phone">Phone: </label>
-    <input
-      type="text"
-      name="phone"
-      placeholder="phone"
-      id="phone"
-      value="{{contact.phone}}"
-    />
-  </div>
+            </form>
+        </div>
+    </div>
 
-  <button>Sutmit</button>
-</form>
+
+</div>
