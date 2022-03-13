@@ -1,0 +1,39 @@
+<h1>Contacs</h1>
+
+<ul>
+    {{#each contacts}}
+    <li>
+        <h3>{{firstname}} {{lastname}}</h3>
+        <p>{{email}}</p>
+        <p>{{phone}}</p>
+
+        <a href="/delete-contact/{{id}}">Delete</a>
+        <a href="/edit-contact/{{id}}">Edit</a>
+    </li>
+    {{/each}}
+</ul>
+
+<form action="/new-contact" method="post">
+    <!-- El name es importante, ya que este nos indicara la clave del Json enviado, mientras que el dato ingresado sera el valor -->
+    <div>
+        <label for="firstname">First name: </label>
+        <input type="text" name="firstname" placeholder="firstname" id="firstname" />
+    </div>
+
+    <div>
+        <label for="lastname">Last name: </label>
+        <input type="text" name="lastname" placeholder="lastname" id="lastname" />
+    </div>
+
+    <div>
+        <label for="email">Email: </label>
+        <input type="text" name="email" placeholder="email" id="email" />
+    </div>
+
+    <div>
+        <label for="phone">Phone: </label>
+        <input type="text" name="phone" placeholder="phone" id="phone" />
+    </div>
+
+    <button>Sutmit</button>
+</form>
